@@ -1,0 +1,67 @@
+Removed Pin From Net: NetName=GND Pin=JP2-1
+Removed Pin From Net: NetName=VCC Pin=JP2-2
+Removed Pin From Net: NetName=GND Pin=U32-2
+Removed Pin From Net: NetName=GND Pin=U32-29
+Removed Pin From Net: NetName=VCC Pin=U32-30
+Removed Member From Class: ClassName=DATN1 Member=U32
+Added Component: Designator=ESP1(ESP32-BOARD30-900)
+Added Component: Designator=JP?(JP 1x3 DT)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "C?m"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH000903"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Jump Ðon Ð?c 2.54MM 1x40P Th?ng 11MM"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=ESP1-14
+Added Pin To Net: NetName=VCC Pin=ESP1-15
+Added Pin To Net: NetName=VCC Pin=JP2-1
+Added Pin To Net: NetName=GND Pin=JP2-2
+Added Pin To Net: NetName=GND Pin=JP?-2
+Added Pin To Net: NetName=VCC Pin=JP?-3
+Added Pin To Net: NetName=NetESP1_4 Pin=ESP1-4
+Added Pin To Net: NetName=NetESP1_4 Pin=JP?-1
+Added Net: Name=NetESP1_4
+Added Pin To Net: NetName=NetESP1_5 Pin=ESP1-5
+Added Pin To Net: NetName=NetESP1_5 Pin=JP2-4
+Added Net: Name=NetESP1_5
+Added Pin To Net: NetName=NetESP1_7 Pin=ESP1-7
+Added Pin To Net: NetName=NetESP1_7 Pin=JP1-2
+Added Net: Name=NetESP1_7
+Added Pin To Net: NetName=NetESP1_10 Pin=ESP1-10
+Added Pin To Net: NetName=NetESP1_10 Pin=R8-1
+Added Pin To Net: NetName=NetESP1_10 Pin=SW4-1
+Added Pin To Net: NetName=NetESP1_10 Pin=SW4-1
+Added Net: Name=NetESP1_10
+Added Pin To Net: NetName=NetESP1_11 Pin=ESP1-11
+Added Pin To Net: NetName=NetESP1_11 Pin=R6-1
+Added Pin To Net: NetName=NetESP1_11 Pin=SW2-1
+Added Pin To Net: NetName=NetESP1_11 Pin=SW2-1
+Added Net: Name=NetESP1_11
+Added Pin To Net: NetName=NetESP1_12 Pin=ESP1-12
+Added Pin To Net: NetName=NetESP1_12 Pin=R7-1
+Added Pin To Net: NetName=NetESP1_12 Pin=SW3-1
+Added Pin To Net: NetName=NetESP1_12 Pin=SW3-1
+Added Net: Name=NetESP1_12
+Added Pin To Net: NetName=NetESP1_13 Pin=ESP1-13
+Added Pin To Net: NetName=NetESP1_13 Pin=R5-1
+Added Pin To Net: NetName=NetESP1_13 Pin=SW1-1
+Added Pin To Net: NetName=NetESP1_13 Pin=SW1-1
+Added Net: Name=NetESP1_13
+Added Pin To Net: NetName=NetESP1_23 Pin=ESP1-23
+Added Pin To Net: NetName=NetESP1_23 Pin=R3-1
+Added Net: Name=NetESP1_23
+Added Pin To Net: NetName=NetESP1_24 Pin=ESP1-24
+Added Pin To Net: NetName=NetESP1_24 Pin=R9-1
+Added Net: Name=NetESP1_24
+Added Pin To Net: NetName=NetESP1_25 Pin=ESP1-25
+Added Pin To Net: NetName=NetESP1_25 Pin=R1-1
+Added Net: Name=NetESP1_25
+Added Pin To Net: NetName=NetESP1_26 Pin=ESP1-26
+Added Pin To Net: NetName=NetESP1_26 Pin=JP3-3
+Added Net: Name=NetESP1_26
+Added Pin To Net: NetName=NetESP1_29 Pin=ESP1-29
+Added Pin To Net: NetName=NetESP1_29 Pin=JP3-4
+Added Net: Name=NetESP1_29
+Added Member To Class: ClassName=DATN1 Member=Component ESP1 ESP32 DEVKIT
+Added Member To Class: ClassName=DATN1 Member=Component JP? PH SENSOR
+Added Room: Name=DATN1
