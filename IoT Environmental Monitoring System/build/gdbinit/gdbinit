@@ -1,0 +1,2 @@
+source E:/ESP_IDF/station/build/gdbinit/symbols
+source E:/ESP_IDF/station/build/gdbinit/connect

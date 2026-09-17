@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>IoT Environmental Monitoring System</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        color: #222;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* =====================================================
+       CONNECTION
+    ===================================================== */
+
+    .connection {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+
+    .connection-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #888;
+    }
+
+    .connection-dot.connected {
+        background: #22c55e;
+    }
+
+    .connection-dot.disconnected {
+        background: #ef4444;
+    }
+
+    /* =====================================================
+       SECTION
+    ===================================================== */
+
+    .section-title {
+        margin: 20px 0 12px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /* =====================================================
+       SENSOR
+    ===================================================== */
+
+    .sensor-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+    }
+
+    .sensor-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .sensor-card i {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .sensor-name {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    .sensor-value {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .sensor-unit {
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* =====================================================
+       MODE
+    ===================================================== */
+
+    .mode-card {
+        margin-top: 20px;
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .mode-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .mode-status {
+        margin-top: 5px;
+        font-size: 15px;
+        color: #666;
+    }
+
+    /* =====================================================
+       SWITCH
+    ===================================================== */
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 58px;
+        height: 30px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider-switch {
+        position: absolute;
+        inset: 0;
+
+        cursor: pointer;
+
+        background: #ccc;
+
+        border-radius: 30px;
+
+        transition: 0.25s;
+    }
+
+    .slider-switch:before {
+        content: "";
+
+        position: absolute;
+
+        width: 24px;
+        height: 24px;
+
+        left: 3px;
+        top: 3px;
+
+        background: white;
+
+        border-radius: 50%;
+
+        transition: 0.25s;
+    }
+
+    .switch input:checked + .slider-switch {
+        background: #2196f3;
+    }
+
+    .switch input:checked + .slider-switch:before {
+        transform: translateX(28px);
+    }
+
+    .switch input:disabled + .slider-switch {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    /* =====================================================
+       OUTPUT
+    ===================================================== */
+
+    .output-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .output-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .output-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .output-icon {
+        font-size: 26px;
+    }
+
+    .output-name {
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .output-status {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        margin-top: 5px;
+
+        font-size: 13px;
+        color: #666;
+    }
+
+    .status-led {
+        width: 10px;
+        height: 10px;
+
+        border-radius: 50%;
+
+        background: #999;
+    }
+
+    .status-led.on {
+        background: #22c55e;
+    }
+
+    .status-led.off {
+        background: #999;
+    }
+
+    /* =====================================================
+       THRESHOLD
+    ===================================================== */
+
+    .threshold-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .threshold-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .threshold-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .range-values {
+        display: flex;
+        justify-content: space-between;
+
+        margin-bottom: 10px;
+
+        font-size: 14px;
+    }
+
+    .range-values span {
+        font-weight: bold;
+    }
+
+    .range-container {
+        position: relative;
+        height: 35px;
+    }
+
+    .range-track {
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        top: 8px;
+
+        height: 6px;
+
+        background: #ddd;
+
+        border-radius: 5px;
+
+        pointer-events: none;
+    }
+
+    .range-container input[type="range"] {
+        position: absolute;
+
+        width: 100%;
+
+        left: 0;
+        top: 0;
+
+        pointer-events: none;
+
+        appearance: none;
+
+        background: transparent;
+    }
+
+    .range-container input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+
+        pointer-events: auto;
+
+        width: 18px;
+        height: 18px;
+
+        border-radius: 50%;
+
+        background: #2196f3;
+
+        cursor: pointer;
+    }
+
+    .range-container input[type="range"]::-moz-range-thumb {
+        pointer-events: auto;
+
+        width: 18px;
+        height: 18px;
+
+        border-radius: 50%;
+
+        background: #2196f3;
+
+        cursor: pointer;
+
+        border: none;
+    }
+
+    .range-note {
+        margin-top: 8px;
+
+        font-size: 12px;
+        color: #777;
+
+        text-align: center;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 850px) {
+
+        .sensor-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .output-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .threshold-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 500px) {
+
+        body {
+            padding: 10px;
+        }
+
+        .sensor-grid {
+            grid-template-columns: 1fr;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<h1>
+    <i class="fa-solid fa-seedling"></i>
+    IoT Environmental Monitoring System
+</h1>
+
+
+<!-- =====================================================
+     CONNECTION
+====================================================== -->
+
+<div class="connection">
+
+    <span id="connectionText">
+        Đang kết nối...
+    </span>
+
+    <span
+        id="connectionDot"
+        class="connection-dot">
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     SENSOR
+====================================================== -->
+
+<div class="section-title">
+    <i class="fa-solid fa-chart-line"></i>
+    SENSOR
+</div>
+
+<div class="sensor-grid">
+
+    <!-- TEMPERATURE -->
+
+    <div class="sensor-card">
+
+        <i class="fa-solid fa-temperature-half"></i>
+
+        <div class="sensor-name">
+            Nhiệt độ
+        </div>
+
+        <div
+            class="sensor-value"
+            id="temperature">
+            --
+        </div>
+
+        <div class="sensor-unit">
+            °C
+        </div>
+
+    </div>
+
+
+    <!-- HUMIDITY -->
+
+    <div class="sensor-card">
+
+        <i class="fa-solid fa-droplet"></i>
+
+        <div class="sensor-name">
+            Độ ẩm không khí
+        </div>
+
+        <div
+            class="sensor-value"
+            id="humidity">
+            --
+        </div>
+
+        <div class="sensor-unit">
+            %
+        </div>
+
+    </div>
+
+
+    <!-- SOIL -->
+
+    <div class="sensor-card">
+
+        <i class="fa-solid fa-water"></i>
+
+        <div class="sensor-name">
+            Độ ẩm đất
+        </div>
+
+        <div
+            class="sensor-value"
+            id="soil">
+            --
+        </div>
+
+        <div class="sensor-unit">
+            %
+        </div>
+
+    </div>
+
+
+    <!-- PH -->
+
+    <div class="sensor-card">
+
+        <i class="fa-solid fa-flask"></i>
+
+        <div class="sensor-name">
+            pH
+        </div>
+
+        <div
+            class="sensor-value"
+            id="ph">
+            --
+        </div>
+
+        <div class="sensor-unit">
+            pH
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CONTROL
+====================================================== -->
+
+<div class="section-title">
+    <i class="fa-solid fa-gears"></i>
+    CONTROL
+</div>
+
+
+<!-- MODE -->
+
+<div class="mode-card">
+
+    <div>
+
+        <div class="mode-title">
+            Chế độ hoạt động
+        </div>
+
+        <div
+            class="mode-status"
+            id="modeText">
+            AUTO
+        </div>
+
+    </div>
+
+
+    <label class="switch">
+
+        <input
+            type="checkbox"
+            id="modeSwitch"
+            onchange="changeMode()">
+
+        <span class="slider-switch"></span>
+
+    </label>
+
+</div>
+
+
+<!-- =====================================================
+     OUTPUT
+====================================================== -->
+
+<div class="output-grid">
+
+    <!-- LED -->
+
+    <div class="output-card">
+
+        <div class="output-left">
+
+            <div class="output-icon">
+                <i class="fa-solid fa-lightbulb"></i>
+            </div>
+
+            <div>
+
+                <div class="output-name">
+                    LED
+                </div>
+
+                <div class="output-status">
+
+                    <span
+                        id="ledStatusLed"
+                        class="status-led off">
+                    </span>
+
+                    <span id="ledStatusText">
+                        OFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <label class="switch">
+
+            <input
+                type="checkbox"
+                id="ledSwitch"
+                onchange="controlRelay(2)">
+
+            <span class="slider-switch"></span>
+
+        </label>
+
+    </div>
+
+
+    <!-- FAN -->
+
+    <div class="output-card">
+
+        <div class="output-left">
+
+            <div class="output-icon">
+                <i class="fa-solid fa-fan"></i>
+            </div>
+
+            <div>
+
+                <div class="output-name">
+                    FAN
+                </div>
+
+                <div class="output-status">
+
+                    <span
+                        id="fanStatusLed"
+                        class="status-led off">
+                    </span>
+
+                    <span id="fanStatusText">
+                        OFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <label class="switch">
+
+            <input
+                type="checkbox"
+                id="fanSwitch"
+                onchange="controlRelay(3)">
+
+            <span class="slider-switch"></span>
+
+        </label>
+
+    </div>
+
+
+    <!-- PUMP -->
+
+    <div class="output-card">
+
+        <div class="output-left">
+
+            <div class="output-icon">
+                <i class="fa-solid fa-faucet-drip"></i>
+            </div>
+
+            <div>
+
+                <div class="output-name">
+                    PUMP
+                </div>
+
+                <div class="output-status">
+
+                    <span
+                        id="pumpStatusLed"
+                        class="status-led off">
+                    </span>
+
+                    <span id="pumpStatusText">
+                        OFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <label class="switch">
+
+            <input
+                type="checkbox"
+                id="pumpSwitch"
+                onchange="controlRelay(4)">
+
+            <span class="slider-switch"></span>
+
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     AUTO THRESHOLD
+====================================================== -->
+
+<div class="section-title">
+    <i class="fa-solid fa-sliders"></i>
+    NGƯỠNG ĐIỀU KHIỂN AUTO
+</div>
+
+
+<div class="threshold-grid">
+
+
+    <!-- =================================================
+         TEMPERATURE
+    ================================================== -->
+
+    <div class="threshold-card">
+
+        <div class="threshold-title">
+            <i class="fa-solid fa-temperature-half"></i>
+            Nhiệt độ
+        </div>
+
+
+        <div class="range-values">
+
+            <span>
+                Min:
+                <span id="tempMinValue">18</span>
+                °C
+            </span>
+
+            <span>
+                Max:
+                <span id="tempMaxValue">35</span>
+                °C
+            </span>
+
+        </div>
+
+
+        <div class="range-container">
+
+            <div class="range-track"></div>
+
+            <input
+                type="range"
+                id="tempMin"
+                min="0"
+                max="50"
+                value="18"
+                oninput="updateRange(1)"
+                onchange="sendThreshold(1)">
+
+            <input
+                type="range"
+                id="tempMax"
+                min="0"
+                max="50"
+                value="35"
+                oninput="updateRange(1)"
+                onchange="sendThreshold(1)">
+
+        </div>
+
+
+        <div class="range-note">
+            FAN điều khiển theo nhiệt độ / độ ẩm
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         HUMIDITY
+    ================================================== -->
+
+    <div class="threshold-card">
+
+        <div class="threshold-title">
+            <i class="fa-solid fa-droplet"></i>
+            Độ ẩm không khí
+        </div>
+
+
+        <div class="range-values">
+
+            <span>
+                Min:
+                <span id="airMinValue">60</span>
+                %
+            </span>
+
+            <span>
+                Max:
+                <span id="airMaxValue">80</span>
+                %
+            </span>
+
+        </div>
+
+
+        <div class="range-container">
+
+            <div class="range-track"></div>
+
+            <input
+                type="range"
+                id="airMin"
+                min="0"
+                max="100"
+                value="60"
+                oninput="updateRange(2)"
+                onchange="sendThreshold(2)">
+
+            <input
+                type="range"
+                id="airMax"
+                min="0"
+                max="100"
+                value="80"
+                oninput="updateRange(2)"
+                onchange="sendThreshold(2)">
+
+        </div>
+
+
+        <div class="range-note">
+            FAN điều khiển theo nhiệt độ / độ ẩm
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SOIL
+    ================================================== -->
+
+    <div class="threshold-card">
+
+        <div class="threshold-title">
+            <i class="fa-solid fa-water"></i>
+            Độ ẩm đất
+        </div>
+
+
+        <div class="range-values">
+
+            <span>
+                Min:
+                <span id="soilMinValue">40</span>
+                %
+            </span>
+
+            <span>
+                Max:
+                <span id="soilMaxValue">70</span>
+                %
+            </span>
+
+        </div>
+
+
+        <div class="range-container">
+
+            <div class="range-track"></div>
+
+            <input
+                type="range"
+                id="soilMin"
+                min="0"
+                max="100"
+                value="40"
+                oninput="updateRange(3)"
+                onchange="sendThreshold(3)">
+
+            <input
+                type="range"
+                id="soilMax"
+                min="0"
+                max="100"
+                value="70"
+                oninput="updateRange(3)"
+                onchange="sendThreshold(3)">
+
+        </div>
+
+
+        <div class="range-note">
+            PUMP điều khiển theo độ ẩm đất
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+/* ============================================================
+ * GLOBAL
+ * ============================================================ */
+
+let eventSource = null;
+
+
+/* ============================================================
+ * CONNECTION STATUS
+ * ============================================================ */
+
+function setConnectionStatus(connected)
+{
+    const text =
+        document.getElementById("connectionText");
+
+    const dot =
+        document.getElementById("connectionDot");
+
+
+    if (connected)
+    {
+        text.textContent =
+            "ESP32 Connected";
+
+        dot.classList.remove(
+            "disconnected"
+        );
+
+        dot.classList.add(
+            "connected"
+        );
+    }
+    else
+    {
+        text.textContent =
+            "ESP32 Disconnected";
+
+        dot.classList.remove(
+            "connected"
+        );
+
+        dot.classList.add(
+            "disconnected"
+        );
+    }
+}
+
+
+/* ============================================================
+ * CONNECT SSE
+ * ============================================================ */
+
+function connectSSE()
+{
+    if (eventSource)
+    {
+        eventSource.close();
+    }
+
+
+    eventSource =
+        new EventSource("/sse");
+
+
+    eventSource.onopen =
+        function()
+        {
+            setConnectionStatus(true);
+        };
+
+
+    eventSource.onmessage =
+        function(event)
+        {
+            try
+            {
+                const data =
+                    JSON.parse(event.data);
+
+                handleSSE(data);
+            }
+            catch (error)
+            {
+                console.error(
+                    "SSE JSON error:",
+                    error,
+                    event.data
+                );
+            }
+        };
+
+
+    eventSource.onerror =
+        function()
+        {
+            setConnectionStatus(false);
+
+            /*
+             * EventSource tự reconnect.
+             */
+        };
+}
+
+
+/* ============================================================
+ * SSE MESSAGE
+ * ============================================================ */
+
+function handleSSE(data)
+{
+    if (!data || !data.type)
+    {
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       CONNECTED
+    -------------------------------------------------------- */
+
+    if (data.type === "connected")
+    {
+        setConnectionStatus(true);
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       SENSOR
+    -------------------------------------------------------- */
+
+    if (data.type === "sensor")
+    {
+        updateSensors(data);
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       FULL STATE
+    -------------------------------------------------------- */
+
+    if (data.type === "state")
+    {
+        renderMode(data.mode);
+
+        setSwitchState(
+            2,
+            data.led
+        );
+
+        setSwitchState(
+            3,
+            data.fan
+        );
+
+        setSwitchState(
+            4,
+            data.pump
+        );
+
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       SINGLE SWITCH
+    -------------------------------------------------------- */
+
+    if (data.type === "sw")
+    {
+        setSwitchState(
+            Number(data.id),
+            Number(data.value)
+        );
+
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       SLIDER
+    -------------------------------------------------------- */
+
+    if (data.type === "slider")
+    {
+        updateSliderFromSSE(data);
+        return;
+    }
+}
+
+
+/* ============================================================
+ * UPDATE SENSOR
+ * ============================================================ */
+
+function updateSensors(data)
+{
+    if (typeof data.temperature === "number")
+    {
+        document.getElementById(
+            "temperature"
+        ).textContent =
+            data.temperature.toFixed(2);
+    }
+
+
+    if (typeof data.humidity === "number")
+    {
+        document.getElementById(
+            "humidity"
+        ).textContent =
+            data.humidity.toFixed(2);
+    }
+
+
+    if (typeof data.soil === "number")
+    {
+        document.getElementById(
+            "soil"
+        ).textContent =
+            data.soil.toFixed(2);
+    }
+
+
+    if (typeof data.ph === "number")
+    {
+        document.getElementById(
+            "ph"
+        ).textContent =
+            data.ph.toFixed(2);
+    }
+}
+
+
+/* ============================================================
+ * RENDER MODE
+ *
+ * Backend:
+ *
+ * modeAuto = 1 → AUTO
+ * modeAuto = 0 → MANUAL
+ *
+ * Frontend:
+ *
+ * checkbox ON  → MANUAL
+ * checkbox OFF → AUTO
+ * ============================================================ */
+
+function renderMode(modeAuto)
+{
+    modeAuto =
+        Boolean(Number(modeAuto));
+
+
+    const modeSwitch =
+        document.getElementById(
+            "modeSwitch"
+        );
+
+    const modeText =
+        document.getElementById(
+            "modeText"
+        );
+
+
+    /*
+     * AUTO:
+     *
+     * checkbox = OFF
+     *
+     * MANUAL:
+     *
+     * checkbox = ON
+     */
+
+    modeSwitch.checked =
+        !modeAuto;
+
+
+    if (modeAuto)
+    {
+        modeText.textContent =
+            "AUTO";
+
+        setOutputSwitchEnabled(
+            false
+        );
+    }
+    else
+    {
+        modeText.textContent =
+            "MANUAL";
+
+        setOutputSwitchEnabled(
+            true
+        );
+    }
+}
+
+
+/* ============================================================
+ * CHANGE MODE
+ *
+ * Checkbox:
+ *
+ * ON  → MANUAL → backend = 0
+ * OFF → AUTO   → backend = 1
+ * ============================================================ */
+
+function changeMode()
+{
+    const modeSwitch =
+        document.getElementById(
+            "modeSwitch"
+        );
+
+
+    const value =
+        modeSwitch.checked
+            ? 0
+            : 1;
+
+
+    sendSwitch(
+        1,
+        value
+    );
+}
+
+
+/* ============================================================
+ * ENABLE OUTPUT SWITCH
+ * ============================================================ */
+
+function setOutputSwitchEnabled(enabled)
+{
+    document.getElementById(
+        "ledSwitch"
+    ).disabled = !enabled;
+
+
+    document.getElementById(
+        "fanSwitch"
+    ).disabled = !enabled;
+
+
+    document.getElementById(
+        "pumpSwitch"
+    ).disabled = !enabled;
+}
+
+
+/* ============================================================
+ * SET SWITCH STATE
+ * ============================================================ */
+
+function setSwitchState(id, value)
+{
+    value =
+        Number(value) ? 1 : 0;
+
+
+    /* --------------------------------------------------------
+       SW1 = MODE
+    -------------------------------------------------------- */
+
+    if (id === 1)
+    {
+        renderMode(value);
+        return;
+    }
+
+
+    let checkbox = null;
+
+
+    /* --------------------------------------------------------
+       SW2 = LED
+    -------------------------------------------------------- */
+
+    if (id === 2)
+    {
+        checkbox =
+            document.getElementById(
+                "ledSwitch"
+            );
+    }
+
+
+    /* --------------------------------------------------------
+       SW3 = FAN
+    -------------------------------------------------------- */
+
+    else if (id === 3)
+    {
+        checkbox =
+            document.getElementById(
+                "fanSwitch"
+            );
+    }
+
+
+    /* --------------------------------------------------------
+       SW4 = PUMP
+    -------------------------------------------------------- */
+
+    else if (id === 4)
+    {
+        checkbox =
+            document.getElementById(
+                "pumpSwitch"
+            );
+    }
+
+
+    if (!checkbox)
+    {
+        return;
+    }
+
+
+    checkbox.checked =
+        Boolean(value);
+
+
+    renderOutputs(
+        id,
+        value
+    );
+}
+
+
+/* ============================================================
+ * RENDER OUTPUT
+ * ============================================================ */
+
+function renderOutputs(id, value)
+{
+    value =
+        Number(value) ? 1 : 0;
+
+
+    let led = null;
+    let text = null;
+
+
+    if (id === 2)
+    {
+        led =
+            document.getElementById(
+                "ledStatusLed"
+            );
+
+        text =
+            document.getElementById(
+                "ledStatusText"
+            );
+    }
+
+    else if (id === 3)
+    {
+        led =
+            document.getElementById(
+                "fanStatusLed"
+            );
+
+        text =
+            document.getElementById(
+                "fanStatusText"
+            );
+    }
+
+    else if (id === 4)
+    {
+        led =
+            document.getElementById(
+                "pumpStatusLed"
+            );
+
+        text =
+            document.getElementById(
+                "pumpStatusText"
+            );
+    }
+
+
+    if (!led || !text)
+    {
+        return;
+    }
+
+
+    if (value)
+    {
+        led.classList.remove("off");
+        led.classList.add("on");
+
+        text.textContent =
+            "ON";
+    }
+    else
+    {
+        led.classList.remove("on");
+        led.classList.add("off");
+
+        text.textContent =
+            "OFF";
+    }
+}
+
+
+/* ============================================================
+ * SEND SWITCH
+ *
+ * id = 1 → /switch1
+ * id = 2 → /switch2
+ * id = 3 → /switch3
+ * id = 4 → /switch4
+ * ============================================================ */
+
+function sendSwitch(id, value)
+{
+    value =
+        Number(value) ? 1 : 0;
+
+
+    const url =
+        "/switch" + id;
+
+
+    fetch(
+        url,
+        {
+            method: "POST",
+
+            headers:
+            {
+                "Content-Type":
+                    "text/plain"
+            },
+
+            body:
+                String(value)
+        }
+    )
+    .then(
+        response =>
+        {
+            if (!response.ok)
+            {
+                throw new Error(
+                    "HTTP " +
+                    response.status
+                );
+            }
+
+            return response.json();
+        }
+    )
+    .then(
+        data =>
+        {
+            console.log(
+                "Switch response:",
+                data
+            );
+        }
+    )
+    .catch(
+        error =>
+        {
+            console.error(
+                "Switch error:",
+                error
+            );
+        }
+    );
+}
+
+
+/* ============================================================
+ * CONTROL RELAY
+ *
+ * LED  → SW2
+ * FAN  → SW3
+ * PUMP → SW4
+ * ============================================================ */
+
+function controlRelay(id)
+{
+    let checkbox = null;
+
+
+    if (id === 2)
+    {
+        checkbox =
+            document.getElementById(
+                "ledSwitch"
+            );
+    }
+
+    else if (id === 3)
+    {
+        checkbox =
+            document.getElementById(
+                "fanSwitch"
+            );
+    }
+
+    else if (id === 4)
+    {
+        checkbox =
+            document.getElementById(
+                "pumpSwitch"
+            );
+    }
+
+
+    if (!checkbox)
+    {
+        return;
+    }
+
+
+    const value =
+        checkbox.checked
+            ? 1
+            : 0;
+
+
+    sendSwitch(
+        id,
+        value
+    );
+}
+
+
+/* ============================================================
+ * UPDATE RANGE
+ *
+ * Prevent:
+ *
+ *     Min >= Max
+ * ============================================================ */
+
+function updateRange(id)
+{
+    let minElement;
+    let maxElement;
+
+    let minValueElement;
+    let maxValueElement;
+
+
+    /* --------------------------------------------------------
+       TEMPERATURE
+    -------------------------------------------------------- */
+
+    if (id === 1)
+    {
+        minElement =
+            document.getElementById(
+                "tempMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "tempMax"
+            );
+
+        minValueElement =
+            document.getElementById(
+                "tempMinValue"
+            );
+
+        maxValueElement =
+            document.getElementById(
+                "tempMaxValue"
+            );
+    }
+
+
+    /* --------------------------------------------------------
+       HUMIDITY
+    -------------------------------------------------------- */
+
+    else if (id === 2)
+    {
+        minElement =
+            document.getElementById(
+                "airMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "airMax"
+            );
+
+        minValueElement =
+            document.getElementById(
+                "airMinValue"
+            );
+
+        maxValueElement =
+            document.getElementById(
+                "airMaxValue"
+            );
+    }
+
+
+    /* --------------------------------------------------------
+       SOIL
+    -------------------------------------------------------- */
+
+    else if (id === 3)
+    {
+        minElement =
+            document.getElementById(
+                "soilMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "soilMax"
+            );
+
+        minValueElement =
+            document.getElementById(
+                "soilMinValue"
+            );
+
+        maxValueElement =
+            document.getElementById(
+                "soilMaxValue"
+            );
+    }
+
+
+    if (
+        !minElement ||
+        !maxElement
+    )
+    {
+        return;
+    }
+
+
+    let min =
+        Number(minElement.value);
+
+    let max =
+        Number(maxElement.value);
+
+
+    /*
+     * Min phải nhỏ hơn Max.
+     */
+
+    if (min >= max)
+    {
+        /*
+         * Người dùng đang kéo MIN.
+         */
+
+        if (
+            document.activeElement ===
+            minElement
+        )
+        {
+            min =
+                max - 1;
+
+            if (
+                min <
+                Number(minElement.min)
+            )
+            {
+                min =
+                    Number(
+                        minElement.min
+                    );
+            }
+
+            minElement.value =
+                min;
+        }
+
+        /*
+         * Người dùng đang kéo MAX.
+         */
+
+        else
+        {
+            max =
+                min + 1;
+
+            if (
+                max >
+                Number(maxElement.max)
+            )
+            {
+                max =
+                    Number(
+                        maxElement.max
+                    );
+            }
+
+            maxElement.value =
+                max;
+        }
+    }
+
+
+    minValueElement.textContent =
+        minElement.value;
+
+    maxValueElement.textContent =
+        maxElement.value;
+}
+
+
+/* ============================================================
+ * SEND THRESHOLD
+ *
+ * id = 1 → /slider1
+ * id = 2 → /slider2
+ * id = 3 → /slider3
+ *
+ * Body:
+ *
+ *     min:max
+ *
+ * Example:
+ *
+ *     30:40
+ * ============================================================ */
+
+function sendThreshold(id)
+{
+    let minElement;
+    let maxElement;
+
+
+    if (id === 1)
+    {
+        minElement =
+            document.getElementById(
+                "tempMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "tempMax"
+            );
+    }
+
+    else if (id === 2)
+    {
+        minElement =
+            document.getElementById(
+                "airMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "airMax"
+            );
+    }
+
+    else if (id === 3)
+    {
+        minElement =
+            document.getElementById(
+                "soilMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "soilMax"
+            );
+    }
+
+
+    if (
+        !minElement ||
+        !maxElement
+    )
+    {
+        return;
+    }
+
+
+    const min =
+        Number(minElement.value);
+
+    const max =
+        Number(maxElement.value);
+
+
+    if (min >= max)
+    {
+        console.warn(
+            "Invalid threshold:",
+            min,
+            max
+        );
+
+        return;
+    }
+
+
+    const body =
+        min + ":" + max;
+
+
+    fetch(
+        "/slider" + id,
+        {
+            method: "POST",
+
+            headers:
+            {
+                "Content-Type":
+                    "text/plain"
+            },
+
+            body: body
+        }
+    )
+    .then(
+        response =>
+        {
+            if (!response.ok)
+            {
+                throw new Error(
+                    "HTTP " +
+                    response.status
+                );
+            }
+
+            return response.json();
+        }
+    )
+    .then(
+        data =>
+        {
+            console.log(
+                "Slider response:",
+                data
+            );
+        }
+    )
+    .catch(
+        error =>
+        {
+            console.error(
+                "Slider error:",
+                error
+            );
+        }
+    );
+}
+
+
+/* ============================================================
+ * UPDATE SLIDER FROM SSE
+ *
+ * Example:
+ *
+ * {
+ *     "type":"slider",
+ *     "id":1,
+ *     "min":30,
+ *     "max":40
+ * }
+ * ============================================================ */
+
+function updateSliderFromSSE(data)
+{
+    const id =
+        Number(data.id);
+
+
+    let minElement;
+    let maxElement;
+
+    let minValueElement;
+    let maxValueElement;
+
+
+    if (id === 1)
+    {
+        minElement =
+            document.getElementById(
+                "tempMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "tempMax"
+            );
+
+        minValueElement =
+            document.getElementById(
+                "tempMinValue"
+            );
+
+        maxValueElement =
+            document.getElementById(
+                "tempMaxValue"
+            );
+    }
+
+    else if (id === 2)
+    {
+        minElement =
+            document.getElementById(
+                "airMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "airMax"
+            );
+
+        minValueElement =
+            document.getElementById(
+                "airMinValue"
+            );
+
+        maxValueElement =
+            document.getElementById(
+                "airMaxValue"
+            );
+    }
+
+    else if (id === 3)
+    {
+        minElement =
+            document.getElementById(
+                "soilMin"
+            );
+
+        maxElement =
+            document.getElementById(
+                "soilMax"
+            );
+
+        minValueElement =
+            document.getElementById(
+                "soilMinValue"
+            );
+
+        maxValueElement =
+            document.getElementById(
+                "soilMaxValue"
+            );
+    }
+
+    else
+    {
+        return;
+    }
+
+
+    if (
+        typeof data.min !== "number" ||
+        typeof data.max !== "number"
+    )
+    {
+        return;
+    }
+
+
+    minElement.value =
+        data.min;
+
+    maxElement.value =
+        data.max;
+
+
+    minValueElement.textContent =
+        data.min;
+
+    maxValueElement.textContent =
+        data.max;
+}
+
+
+/* ============================================================
+ * INITIALIZATION
+ * ============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function()
+    {
+        /*
+         * Giá trị mặc định giao diện.
+         * Sau khi SSE kết nối,
+         * state thật từ ESP32 sẽ cập nhật lại.
+         */
+
+        updateRange(1);
+        updateRange(2);
+        updateRange(3);
+
+
+        /*
+         * Mặc định hiển thị AUTO.
+         */
+
+        renderMode(true);
+
+
+        /*
+         * Kết nối SSE.
+         */
+
+        connectSSE();
+    }
+);
+
+</script>
+
+</body>
+</html>

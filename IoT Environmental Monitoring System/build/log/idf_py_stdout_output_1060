@@ -1,0 +1,21 @@
+Command: ninja all
+[1/12] Performing build step for 'bootloader'
+[1/1] C:\Windows\system32\cmd.exe /C "cd /D E:\ESP_IDF\station\build\bootloader\esp-idf\esptool_py && E:\app\esp32_idf\env\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 E:/ESP_IDF/station/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6630 bytes. 0x9d0 bytes (9%) free.
+[2/12] No install step for 'bootloader'
+[3/12] Completed 'bootloader'
+[4/12] Building C object esp-idf/dht11/CMakeFiles/__idf_dht11.dir/dht11.c.obj
+[5/12] Linking C static library esp-idf\dht11\libdht11.a
+[6/12] Linking C static library esp-idf\main\libmain.a
+[7/12] Generating esp-idf/esp_system/ld/sections.ld
+[8/12] Building ASM object CMakeFiles/wifi_station.elf.dir/index.html.S.obj
+[9/12] Building C object CMakeFiles/wifi_station.elf.dir/project_elf_src_esp32.c.obj
+[10/12] Linking CXX executable wifi_station.elf
+[11/12] Generating binary image from built executable
+esptool.py v4.12.dev1
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated E:/ESP_IDF/station/build/wifi_station.bin
+[12/12] C:\Windows\system32\cmd.exe /C "cd /D E:\ESP_IDF\station\build\esp-idf\esptool_py && E:\app\esp32_idf\env\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/partition_table/check_sizes.py --offset 0x8000 partition --type app E:/ESP_IDF/station/build/partition_table/partition-table.bin E:/ESP_IDF/station/build/wifi_station.bin"
+wifi_station.bin binary size 0xb7b00 bytes. Smallest app partition is 0x100000 bytes. 0x48500 bytes (28%) free.

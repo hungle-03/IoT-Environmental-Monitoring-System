@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+E:/ESP_IDF/station/build/CMakeFiles/bootloader
+E:/ESP_IDF/station/build/CMakeFiles/bootloader.rule
+E:/ESP_IDF/station/build/CMakeFiles/bootloader-complete.rule
+E:/ESP_IDF/station/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+E:/ESP_IDF/station/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+E:/ESP_IDF/station/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+E:/ESP_IDF/station/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+E:/ESP_IDF/station/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+E:/ESP_IDF/station/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+E:/ESP_IDF/station/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

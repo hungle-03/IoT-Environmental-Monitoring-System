@@ -1,0 +1,75 @@
+Command: ninja all
+[1/11] Performing build step for 'bootloader'
+[1/1] C:\Windows\system32\cmd.exe /C "cd /D E:\ESP_IDF\station\build\bootloader\esp-idf\esptool_py && E:\app\esp32_idf\env\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 E:/ESP_IDF/station/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6630 bytes. 0x9d0 bytes (9%) free.
+[2/11] No install step for 'bootloader'
+[3/11] Completed 'bootloader'
+[4/11] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/app_main.c.obj
+FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/app_main.c.obj 
+ccache E:\app\esp32_idf\env\Espressif\tools\xtensa-esp-elf\esp-14.2.0_20260121\xtensa-esp-elf\bin\xtensa-esp32-elf-gcc.exe -DESP_PLATFORM -DIDF_VER=\"HEAD-HASH-NOTFOUND\" -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -IE:/ESP_IDF/station/build/config -IE:/ESP_IDF/station/main -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/newlib/platform_include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/freertos/config/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/freertos/config/include/freertos -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/freertos/config/xtensa/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/freertos/FreeRTOS-Kernel/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/freertos/esp_additions/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/include/soc -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/include/soc/esp32 -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/dma/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/ldo/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/debug_probe/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/mspi_timing_tuning/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/mspi_timing_tuning/tuning_scheme_impl/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/power_supply/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/port/esp32/. -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_hw_support/port/esp32/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/heap/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/heap/tlsf -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/log/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/soc/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/soc/esp32 -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/soc/esp32/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/soc/esp32/register -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/hal/platform_port/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/hal/esp32/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/hal/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_rom/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_rom/esp32/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_rom/esp32/include/esp32 -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_rom/esp32 -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_common/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_system/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_system/port/soc -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_system/port/include/private -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/xtensa/esp32/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/xtensa/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/xtensa/deprecated_include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/include/apps -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/include/apps/sntp -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/lwip/src/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/port/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/port/freertos/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/port/esp32xx/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/port/esp32xx/include/arch -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/port/esp32xx/include/sys -IE:/ESP_IDF/station/common/http_web_server -IE:/ESP_IDF/station/common/wifi_manager -IE:/ESP_IDF/station/common/output_iot -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_driver_gpio/include -IE:/ESP_IDF/station/common/input_iot -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_wifi/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_wifi/include/local -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_wifi/wifi_apps/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_wifi/wifi_apps/nan_app/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_event/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_phy/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_phy/esp32/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_netif/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/nvs_flash/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_partition/include -IE:/ESP_IDF/station/common/adc -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_adc/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_adc/interface -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_adc/esp32/include -IE:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/esp_adc/deprecated/include -IE:/ESP_IDF/station/common/dht11 @"E:/ESP_IDF/station/build/toolchain/cflags" -fdiagnostics-color=always -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-error=extra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Og -fno-shrink-wrap -fmacro-prefix-map=E:/ESP_IDF/station=. -fmacro-prefix-map=E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -std=gnu17 -Wno-old-style-declaration -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/app_main.c.obj -MF esp-idf\main\CMakeFiles\__idf_main.dir\app_main.c.obj.d -o esp-idf/main/CMakeFiles/__idf_main.dir/app_main.c.obj -c E:/ESP_IDF/station/main/app_main.c
+E:/ESP_IDF/station/main/app_main.c: In function 'handleSingleButton':
+E:/ESP_IDF/station/main/app_main.c:77:54: error: too few arguments to function 'timer_gettime'
+   77 |   if (reading != btn.lastReading) btn.lastDebounce = timer_gettime();
+      |                                                      ^~~~~~~~~~~~~
+In file included from E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/newlib/platform_include/time.h:11,
+                 from E:/app/esp32_idf/env/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20260121/xtensa-esp-elf/xtensa-esp-elf/include/sys/stat.h:9,
+                 from E:/app/esp32_idf/env/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20260121/xtensa-esp-elf/xtensa-esp-elf/include/sys/_default_fcntl.h:211,
+                 from E:/app/esp32_idf/env/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20260121/xtensa-esp-elf/xtensa-esp-elf/include/sys/fcntl.h:3,
+                 from E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/newlib/platform_include/sys/fcntl.h:8,
+                 from E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/port/include/lwipopts.h:15,
+                 from E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/lwip/src/include/lwip/opt.h:51,
+                 from E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/components/lwip/lwip/src/include/lwip/err.h:39,
+                 from E:/ESP_IDF/station/main/app_main.c:19:
+E:/app/esp32_idf/env/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20260121/xtensa-esp-elf/xtensa-esp-elf/include/time.h:185:5: note: declared here
+  185 | int timer_gettime (timer_t timerid, struct itimerspec *value);
+      |     ^~~~~~~~~~~~~
+E:/ESP_IDF/station/main/app_main.c:79:8: error: too few arguments to function 'timer_gettime'
+   79 |   if ((timer_gettime() - btn.lastDebounce) > DEBOUNCE_DELAY) {
+      |        ^~~~~~~~~~~~~
+E:/app/esp32_idf/env/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20260121/xtensa-esp-elf/xtensa-esp-elf/include/time.h:185:5: note: declared here
+  185 | int timer_gettime (timer_t timerid, struct itimerspec *value);
+      |     ^~~~~~~~~~~~~
+E:/ESP_IDF/station/main/app_main.c: In function 'handleButtons':
+E:/ESP_IDF/station/main/app_main.c:99:5: error: 'modeAuto' undeclared (first use in this function); did you mean 'mode_t'?
+   99 |     modeAuto = !modeAuto;
+      |     ^~~~~~~~
+      |     mode_t
+E:/ESP_IDF/station/main/app_main.c:99:5: note: each undeclared identifier is reported only once for each function it appears in
+E:/ESP_IDF/station/main/app_main.c:104:5: error: 'pumpState' undeclared (first use in this function)
+  104 |     pumpState = !pumpState;
+      |     ^~~~~~~~~
+E:/ESP_IDF/station/main/app_main.c:109:5: error: 'fanState' undeclared (first use in this function)
+  109 |     fanState = !fanState;
+      |     ^~~~~~~~
+E:/ESP_IDF/station/main/app_main.c:114:5: error: 'ledState' undeclared (first use in this function)
+  114 |     ledState = !ledState;
+      |     ^~~~~~~~
+E:/ESP_IDF/station/main/app_main.c: In function 'autoControl':
+E:/ESP_IDF/station/main/app_main.c:121:8: error: 'modeAuto' undeclared (first use in this function); did you mean 'mode_t'?
+  121 |   if (!modeAuto)    return;
+      |        ^~~~~~~~
+      |        mode_t
+E:/ESP_IDF/station/main/app_main.c:122:8: error: 'sensorReady' undeclared (first use in this function)
+  122 |   if (!sensorReady) return;
+      |        ^~~~~~~~~~~
+E:/ESP_IDF/station/main/app_main.c:125:17: error: 'fanState' undeclared (first use in this function)
+  125 |   bool newFan = fanState;
+      |                 ^~~~~~~~
+E:/ESP_IDF/station/main/app_main.c:126:12: error: 'temp' undeclared (first use in this function)
+  126 |   if      (temp > newTempMax || humi > newHumiMax) newFan = true;
+      |            ^~~~
+E:/ESP_IDF/station/main/app_main.c:126:33: error: 'humi' undeclared (first use in this function)
+  126 |   if      (temp > newTempMax || humi > newHumiMax) newFan = true;
+      |                                 ^~~~
+E:/ESP_IDF/station/main/app_main.c:130:18: error: 'pumpState' undeclared (first use in this function)
+  130 |   bool newPump = pumpState;
+      |                  ^~~~~~~~~
+E:/ESP_IDF/station/main/app_main.c:131:12: error: 'soil' undeclared (first use in this function)
+  131 |   if      (soil < newSoilMin) newPump = true;
+      |            ^~~~
+E:/ESP_IDF/station/main/app_main.c: In function 'app_main':
+E:/ESP_IDF/station/main/app_main.c:186:33: error: 'INTERRUPT_TYPE_EDLE' undeclared (first use in this function)
+  186 |     input_gpio_create(BTN_MODE, INTERRUPT_TYPE_EDLE);
+      |                                 ^~~~~~~~~~~~~~~~~~~
+[5/11] Building C object esp-idf/http_web_server/CMakeFiles/__idf_http_web_server.dir/http_sever_main.c.obj
+ninja: build stopped: subcommand failed.

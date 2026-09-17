@@ -1,0 +1,25 @@
+Command: ninja all
+[0/1] Re-running CMake...
+-- git rev-parse returned 'fatal: detected dubious ownership in repository at 'E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4'
+'E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4' is owned by:
+	BUILTIN/Administrators (S-1-5-32-544)
+but the current user is:
+	DESKTOP-7PV39CO/Le Hung (S-1-5-21-2069713577-1945806029-3675620419-1001)
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4'
+-- Minimal build - OFF
+-- ccache will be used for faster recompilation
+-- git rev-parse returned 'fatal: not a git repository (or any of the parent directories): .git'
+-- Could not use 'git describe' to determine PROJECT_VER.
+-- Building ESP-IDF components for target esp32
+NOTICE: Skipping optional dependency: espressif/esp_wifi_remote
+NOTICE: Skipping optional dependency: espressif/esp_hosted
+NOTICE: Processing 1 dependencies:
+NOTICE: [1/1] idf (5.5.4)
+-- ESP-TEE is currently supported only on the esp32c6;esp32h2;esp32c5 SoCs
+NOTICE: Skipping optional dependency: espressif/esp_wifi_remote
+NOTICE: Skipping optional dependency: espressif/esp_hosted
+-- Configuring incomplete, errors occurred!
+FAILED: build.ninja 
+E:\app\esp32_idf\env\Espressif\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SE:\ESP_IDF\station -BE:\ESP_IDF\station\build

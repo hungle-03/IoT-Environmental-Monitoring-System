@@ -1,0 +1,19 @@
+Command: cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DPYTHON=E:\app\esp32_idf\env\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe -DESP_PLATFORM=1 -DCCACHE_ENABLE=1 E:\ESP_IDF\station
+fatal: detected dubious ownership in repository at 'E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4'
+'E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4' is owned by:
+	BUILTIN/Administrators (S-1-5-32-544)
+but the current user is:
+	DESKTOP-7PV39CO/Le Hung (S-1-5-21-2069713577-1945806029-3675620419-1001)
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4
+CMake Error at E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/tools/cmake/build.cmake:330 (message):
+  Failed to resolve component 'http_sever_main' required by component 'main':
+  unknown name.
+Call Stack (most recent call first):
+  E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/tools/cmake/build.cmake:379 (__build_resolve_and_add_req)
+  E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/tools/cmake/build.cmake:687 (__build_expand_requirements)
+  E:/app/esp32_idf/env/Espressif/frameworks/esp-idf-v5.5.4/tools/cmake/project.cmake:752 (idf_build_process)
+  CMakeLists.txt:11 (project)
+
+
